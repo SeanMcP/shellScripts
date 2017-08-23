@@ -14,23 +14,23 @@ touch models/index.js public/main.css
 
 echo 'node_modules/' > .gitignore
 
-echo '<!DOCTYPE html>
+echo "<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>'$projectName'</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel='stylesheet' href='main.css'>
   </head>
   <body>
-    <div class="container">
+    <div class='container'>
       {{{yield}}}
     </div>
   </body>
-</html>' > views/layout.mustache
+</html>" > views/layout.mustache
 
 echo '<h1>Index.mustache</h1>' > views/index.mustache
 
-echo 'const express = require('express')
+echo "const express = require('express')
 const mustacheExpress = require('mustache-express')
 const path = require('path')
 const routes = require('./routes/index')
@@ -60,7 +60,7 @@ router.get('/', function(req, res) {
   res.render('index')
 })
 
-module.exports = router' > routes/index.js
+module.exports = router" > routes/index.js
 
 echo '# '$projectName'' > README.md
 
