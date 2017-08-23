@@ -8,13 +8,9 @@ read projectName
 
 mkdir $projectName && cd $projectName
 
-mkdir public && touch public/main.css
+mkdir views routes public models
 
-mkdir views && touch views/layout.mustache views/index.mustache
-
-mkdir routes && touch routes/index.js
-
-mkdir models && touch models/index.js
+touch models/index.js public/main.css
 
 echo 'node_modules/' > .gitignore
 
@@ -22,7 +18,7 @@ echo '<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>'$projectName'</title>
     <link rel="stylesheet" href="main.css">
   </head>
   <body>
@@ -30,9 +26,9 @@ echo '<!DOCTYPE html>
       {{{yield}}}
     </div>
   </body>
-</html>' >> views/layout.mustache
+</html>' > views/layout.mustache
 
-echo '<h1>Index.mustache</h1>' >> views/index.mustache
+echo '<h1>Index.mustache</h1>' > views/index.mustache
 
 echo 'const express = require('express')
 const mustacheExpress = require('mustache-express')
@@ -64,9 +60,9 @@ router.get('/', function(req, res) {
   res.render('index')
 })
 
-module.exports = router' >> routes/index.js
+module.exports = router' > routes/index.js
 
-echo '# README' > README.md
+echo '# '$projectName'' > README.md
 
 npm init -y
 
