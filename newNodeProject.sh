@@ -10,28 +10,29 @@ mkdir $projectName && cd $projectName
 
 mkdir views routes public models
 
-touch models/index.js public/main.css
+touch public/main.css
 
 echo 'node_modules/' > .gitignore
 
-echo "<!DOCTYPE html>
+echo '<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>'$projectName'</title>
-    <link rel='stylesheet' href='main.css'>
+    <link rel="stylesheet" href="main.css">
   </head>
   <body>
-    <div class='container'>
+    <div class="container">
       {{{yield}}}
     </div>
   </body>
-</html>" > views/layout.mustache
+</html>' > views/layout.mustache
 
-echo '<h1>Index.mustache</h1>' > views/index.mustache
+echo '<p>Hello, from index.mustache</p>' > views/index.mustache
 
 echo "const express = require('express')
 const mustacheExpress = require('mustache-express')
+const bodyParser = require('body-parser')
 const path = require('path')
 const routes = require('./routes/index')
 const morgan = require('morgan')
@@ -45,15 +46,18 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'mustache')
 app.set('layout', 'layout')
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
+
 app.use(routes)
 
 app.use(morgan('dev'))
 
 app.listen(3000, function() {
   console.log('App is running on localhost:3000');
-})' > server.js
+})" > server.js
 
-echo 'const express = require('express')
+echo "const express = require('express')
 const router = express.Router()
 
 router.get('/', function(req, res) {
@@ -66,4 +70,4 @@ echo '# '$projectName'' > README.md
 
 npm init -y
 
-npm install --save express mustache mustache-express path morgan
+npm install --save express mustache mustache-express path morgan body-parser
